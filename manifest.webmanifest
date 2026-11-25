@@ -1,0 +1,11 @@
+{
+  "name": "حساب‌یار",
+  "short_name": "حساب‌یار",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f6fb",
+  "theme_color": "#101827",
+  "icons": []
+}
