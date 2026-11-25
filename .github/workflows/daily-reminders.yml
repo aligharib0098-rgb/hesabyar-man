@@ -1,0 +1,28 @@
+
+name: Daily financial reminders
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  send-reminders:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Supabase reminder function
+        env:
+          SUPABASE_URL: https://sikhgfdxpvygdvekqksh.supabase.co
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          REMINDER_SECRET: ${{ secrets.REMINDER_SECRET }}
+        run: |
+          test -n "$SUPABASE_ANON_KEY" || exit 1
+          test -n "$REMINDER_SECRET" || exit 1
+          curl --fail-with-body --silent --show-error \
+            "$SUPABASE_URL/functions/v1/send-reminders" \
+            -X POST \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
+            -H "x-reminder-secret: $REMINDER_SECRET" \
+            -H "Content-Type: application/json" \
+            --data '{}'
