@@ -19,7 +19,7 @@ jobs:
           test -n "$SUPABASE_ANON_KEY" || exit 1
           test -n "$REMINDER_SECRET" || exit 1
           curl --fail-with-body --silent --show-error \
-            "$SUPABASE_URL/functions/v1/send-reminders" \
+            "$SUPABASE_URL/functions/v1/rapid-task" \
             -X POST \
             -H "apikey: $SUPABASE_ANON_KEY" \
             -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
